@@ -9,7 +9,8 @@
   <body>
     <h1>Welcome <%= user.username %>!</h1>
     <h2>Your Projects:</h2>
-    <% if (typeof projects !== 'undefined') { %>
+
+    <% if ( projects.length > 0) { %>
     <ul>
       <% projects.forEach(project => { %>
       <li><%= project.projectname %></li>
@@ -18,9 +19,10 @@
       <!-- Display more project details as needed -->
       <% }) %>
     </ul>
-    <% } else {%>
-    <p>no projects added</p>
-    <%}%>
-    <a href="/projects">Add Project</a>
+    <% } else { %>
+    <p>No projects added yet</p>
+    <% } %>
+
+    <a href="/projects/create?userId=<%= user._id %>">Add Project</a>
   </body>
 </html>

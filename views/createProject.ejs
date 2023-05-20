@@ -9,15 +9,18 @@
   <body>
     <h1>Create Project</h1>
 
-    <form method="POST" action="/projects">
+    <form method="POST" action="/projects/create">
+      <label for="projectname">Project Name:</label>
+      <input type="text" id="projectname" name="projectname" required />
       <div>
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required />
+        <label for="author">Author:</label>
+        <textarea id="author" name="author" required></textarea>
       </div>
       <div>
         <label for="description">Description:</label>
         <textarea id="description" name="description" required></textarea>
       </div>
+      <input type="hidden" name="userId" value="<%= userId %>" />
       <button type="submit">Create Project</button>
     </form>
   </body>

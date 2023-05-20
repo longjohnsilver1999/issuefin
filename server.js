@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const session = require("express-session");
+//const session = require("express-session");
 const userRoutes = require("./routes/user");
 const projectRoutes = require("./routes/projects");
 //middleware
@@ -42,3 +42,13 @@ app.set("view engine", "ejs");
 // Use your routes
 app.use("/", userRoutes);
 //app.get("/dashboard", userRoutes.showDashboard);
+//app.use("/projects", userRoutes.createProject());
+const session = require("express-session");
+
+app.use(
+  session({
+    secret: "your-secret-key",
+    resave: false,
+    saveUninitialized: true,
+  })
+);

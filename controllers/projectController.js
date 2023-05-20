@@ -1,18 +1,7 @@
-const Project = require("../models/project");
-exports.showProjectForm = (req, res) => {
-  res.render("createProject.ejs");
-};
-
-exports.createProject = async (req, res) => {
-  try {
-    const { projectname, author, description } = req.body;
-    const project = new Project({ projectname, author, description });
-    await project.save();
-    res.status(201).json({ message: "Project created successfully" });
-  } catch (error) {
-    res.status(500).json({ error: "Unable to create project" });
-  }
-};
+const Project = require("../models/projectModel");
+// exports.showProjectForm = (req, res) => {
+//   res.render("createProject.ejs");
+// };
 
 exports.getAllProjects = async (req, res) => {
   try {
