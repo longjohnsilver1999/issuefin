@@ -10,5 +10,7 @@ router.post("/login", userController.loginUser);
 router.get("/dashboard", userController.showDashboard);
 router.get("/projects/create", userController.showCreateProjectForm);
 router.post("/projects/create", userController.createProject);
-
+router.get("/issues", userController.showIssues);
+router.get("/issues/create", userController.showCreateIssueForm);
+router.post("/issues/create", userController.createIssue);
 module.exports = router;

@@ -1,6 +1,6 @@
 const User = require("../models/userModel");
 const Project = require("../models/projectModel");
-const Issues = require("../models/issueModel");
+const Issue = require("../models/issueModel");
 const session = require("express-session");
 const mongoose = require("mongoose");
 exports.showRegisterForm = (req, res) => {
@@ -115,24 +115,35 @@ exports.createProject = async (req, res) => {
 
 exports.showIssues = async (req, res) => {
   const projectId = req.query.projectId;
-
+  console.log(projectId);
   try {
-    const project = await Project.findById(projectId).populate("issues");
+    const project = await Project.findById(projectId);
+
+    console.log("Project:", project);
 
     if (!project) {
-      // Handle case when project is not found
-      return res.render("error", { message: "Project not found" });
+      console.error("Project not found");
+      res.render("dashboard", { error: "User not found" });
     }
 
-    const issues = project.issues;
-
-    res.render("issues", { projectId, issues });
-  } catch (error) {
-    // Handle any errors that occur during database query
-    res.render("error", { message: "Internal Server Error" });
+    const issues = await Issue.find({ project: project._id });
+    console.log(issues);
+    if (issues) {
+      console.log(issues);
+      res.render("issues", { project, issues });
+    } else {
+      res.render("issues", { project, error: "No issues added yet" });
+    }
+  } catch (err) {
+    console.error("Error finding project or issue:", err);
+    return res.status(500).send("Internal Server Error");
   }
 };
 
+exports.showCreateIssueForm = async (req, res) => {
+  const projectId = req.query.projectId;
+  res.render("createIssue.ejs", { projectId });
+};
 // exports.createProject = async (req, res) => {
 //   const { projectname, author, description, userId } = req.body;
 
@@ -152,3 +163,39 @@ exports.showIssues = async (req, res) => {
 //     res.redirect("dashboard");
 //   }
 // };
+exports.createIssue = async (req, res) => {
+  const { issuename, author, description, status, type, projectId } = req.body;
+
+  // Validate if projectname is provided
+  if (!issuename) {
+    console.error("issuename is required");
+    return res.redirect("back");
+  }
+
+  // Validate if userId is a valid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(projectId)) {
+    console.error("Invalid projectId");
+    return res.redirect("back");
+  }
+
+  try {
+    const issue = await Issue.create({
+      issuename,
+      author,
+      description,
+      status,
+      type,
+      project: projectId,
+    });
+
+    console.log("Issue created:", issue);
+    // Fetch the user's projects again
+    const issues = await Issue.find({ project: projectId });
+    const projectt = await Project.findOne({ _id: projectId });
+    // Render the updated dashboard template with the projects
+    res.render("issues", { project: projectt, issues });
+  } catch (err) {
+    console.error("Error creating project:", err);
+    res.redirect("back");
+  }
+};

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Issues related to <%= project.projectname %></h1>
+    <% if ( issues.length > 0) { %>
+
+    <ul>
+      <% issues.forEach(issue => { %>
+      <a href="#">
+        <div class="box">
+          <li>Issue: <%= issue.issuename %></li>
+          <li>Description:<%= issue.description %></li>
+          <li>Author:<%= issue.author %></li>
+          <li>Status:<%=issue.status %></li>
+          <li>Type:<%=issue.type %></li>
+          <li>
+            <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
+          </li>
+          <li>
+            <a href=""><i class="fa-solid fa-trash"></i></a>
+          </li>
+        </div>
+      </a>
+      <% }) %>
+    </ul>
+
+    <% } else { %>
+    <p>No issues added yet</p>
+    <% } %>
+    <div class="">
+      <a href="/issues/create?projectId=<%= project._id %>">Add Issue</a>
+    </div>
+  </body>
+</html>

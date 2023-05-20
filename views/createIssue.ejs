@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Create Issue</h1>
+
+    <form method="POST" action="/issues/create">
+      <label for="issuename">Issue Name:</label>
+      <input type="text" id="issuename" name="issuename" required />
+      <div>
+        <label for="author">Author:</label>
+        <textarea id="author" name="author" required></textarea>
+      </div>
+      <div>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+      </div>
+      <div>
+        <label>Status:</label>
+        <label
+          ><input type="radio" name="status" value="Active" checked />
+          Active</label
+        >
+        <label
+          ><input type="radio" name="status" value="Inactive" /> Inactive</label
+        >
+      </div>
+      <div>
+        <label>Type:</label>
+        <label
+          ><input type="radio" name="type" value="Bug" checked /> Bug</label
+        >
+        <label
+          ><input type="radio" name="type" value="UI Development" /> UI
+          Development</label
+        >
+        <label><input type="radio" name="type" value="Error" /> Error</label>
+        <label
+          ><input type="radio" name="type" value="Code Burst" />Code
+          Burst</label
+        >
+      </div>
+      <input type="hidden" name="projectId" value="<%= projectId %>" />
+      <button type="submit">Create Issue</button>
+    </form>
+  </body>
+</html>

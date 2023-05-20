@@ -16,7 +16,7 @@ const issueSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["Active", "InActive"],
+      enum: ["Active", "Inactive"],
     },
     type: {
       type: String,

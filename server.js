@@ -41,8 +41,10 @@ app.set("view engine", "ejs");
 
 // Use your routes
 app.use("/", userRoutes);
-//app.get("/dashboard", userRoutes.showDashboard);
+
+//app.get("/issues", userRoutes);
 //app.use("/projects", userRoutes.createProject());
+
 const session = require("express-session");
 
 app.use(
