@@ -1,5 +1,6 @@
 const User = require("../models/userModel");
 const Project = require("../models/projectModel");
+const Issues = require("../models/issueModel");
 const session = require("express-session");
 const mongoose = require("mongoose");
 exports.showRegisterForm = (req, res) => {
@@ -111,6 +112,27 @@ exports.createProject = async (req, res) => {
     res.redirect("back");
   }
 };
+
+exports.showIssues = async (req, res) => {
+  const projectId = req.query.projectId;
+
+  try {
+    const project = await Project.findById(projectId).populate("issues");
+
+    if (!project) {
+      // Handle case when project is not found
+      return res.render("error", { message: "Project not found" });
+    }
+
+    const issues = project.issues;
+
+    res.render("issues", { projectId, issues });
+  } catch (error) {
+    // Handle any errors that occur during database query
+    res.render("error", { message: "Internal Server Error" });
+  }
+};
+
 // exports.createProject = async (req, res) => {
 //   const { projectname, author, description, userId } = req.body;
 

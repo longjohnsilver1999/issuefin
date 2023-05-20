@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // Set up your views directory and view engine
-app.set("views", "./views");
+//app.set("views", "./views");
 app.set("view engine", "ejs");
 
 // Use your routes
@@ -51,4 +51,18 @@ app.use(
     resave: false,
     saveUninitialized: true,
   })
+);
+const path = require("path");
+app.use("/css", express.static(path.resolve(__dirname, "assets/css")));
+app.use("/images", express.static(path.resolve(__dirname, "assets/images")));
+app.use("/script", express.static(path.resolve(__dirname, "assets/script")));
+
+app.use("/projects/css", express.static(path.resolve(__dirname, "assets/css")));
+app.use(
+  "/projects/images",
+  express.static(path.resolve(__dirname, "assets/images"))
+);
+app.use(
+  "/projects/script",
+  express.static(path.resolve(__dirname, "assets/script"))
 );

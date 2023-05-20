@@ -1,0 +1,51 @@
+h1 {
+  background-color: lightgreen;
+}
+.box {
+  border: 1px solid black;
+  margin-bottom: 50px;
+  background-color: lightblue;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-radius: 10px;
+  font-size: 1.2rem;
+}
+.box:hover {
+  cursor: pointer;
+  background-color: rgb(118, 207, 236);
+}
+ul a {
+  color: black;
+}
+
+body {
+  background-color: rgb(212, 238, 212);
+}
+ul {
+  list-style: none;
+}
+
+li {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.addProject {
+  background-color: lightgreen;
+  width: 100%;
+  font-size: 2rem;
+  display: flex;
+  justify-content: space-around;
+}
+.addProject a {
+  color: black;
+}
+.addProject:hover {
+  background-color: green;
+}
+.addProject a:hover {
+  cursor: pointer;
+
+  color: aliceblue;
+}

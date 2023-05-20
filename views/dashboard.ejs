@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="css/style.css" />
     <title>Document</title>
   </head>
   <body>
@@ -11,18 +19,37 @@
     <h2>Your Projects:</h2>
 
     <% if ( projects.length > 0) { %>
+
     <ul>
       <% projects.forEach(project => { %>
-      <li><%= project.projectname %></li>
-      <li><%= project.author %></li>
-      <li><%= project.description %></li>
-      <!-- Display more project details as needed -->
+      <a href="#">
+        <div class="box">
+          <li>
+            Project:
+            <a href="/issues?projectId=<%= project._id %>"
+              ><%= project.projectname %></a
+            >
+          </li>
+          <li>Author:<%= project.author %></li>
+          <li>Description:<%= project.description %></li>
+          <li>
+            <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
+          </li>
+          <li>
+            <a href=""><i class="fa-solid fa-trash"></i></a>
+          </li>
+        </div>
+      </a>
       <% }) %>
     </ul>
+
     <% } else { %>
     <p>No projects added yet</p>
     <% } %>
-
-    <a href="/projects/create?userId=<%= user._id %>">Add Project</a>
+    <div class="addProject">
+      <a href="/projects/create?userId=<%= user._id %>"
+        >Add Project<i class="fa-solid fa-plus"></i
+      ></a>
+    </div>
   </body>
 </html>
