@@ -57,7 +57,7 @@ app.use(
 const path = require("path");
 app.use("/css", express.static(path.resolve(__dirname, "assets/css")));
 app.use("/images", express.static(path.resolve(__dirname, "assets/images")));
-app.use("/script", express.static(path.resolve(__dirname, "assets/script")));
+app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
 
 app.use("/projects/css", express.static(path.resolve(__dirname, "assets/css")));
 app.use(
@@ -66,5 +66,15 @@ app.use(
 );
 app.use(
   "/projects/script",
+  express.static(path.resolve(__dirname, "assets/script"))
+);
+
+app.use("/issues/css", express.static(path.resolve(__dirname, "assets/css")));
+app.use(
+  "/issues/images",
+  express.static(path.resolve(__dirname, "assets/images"))
+);
+app.use(
+  "/issues/script",
   express.static(path.resolve(__dirname, "assets/script"))
 );
